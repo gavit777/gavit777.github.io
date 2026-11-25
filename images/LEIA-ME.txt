@@ -1,0 +1,5 @@
+Imagens do site iGuina.
+
+Foram extraídas automaticamente do arquivo original (nomes img-XXXX.ext).
+Os caminhos já estão configurados em css/style.css, js/data.js e js/app.js.
+Para trocar uma imagem, substitua o arquivo mantendo o mesmo nome.

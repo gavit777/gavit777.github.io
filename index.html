@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iGuina</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<body>
+<button type="button" class="mus" id="mus"></button>
+<header>
+  <h1 class="logo"><img class="logoic" id="logoic" alt=""><span id="logot">iGuina</span></h1>
+  <nav aria-label="Seções">
+    <button type="button" id="td" aria-pressed="true">Decks</button>
+    <button type="button" id="tg" aria-pressed="false">Galeria</button>
+    <button type="button" id="tm" aria-pressed="false">Criar carta</button>
+    <button type="button" id="ts" aria-pressed="true">Visual realista</button>
+  </nav>
+</header>
+<main>
+  <section id="dks">
+    <div class="dkhead">
+      <div class="dkt"><h2 id="dtitle"></h2><p id="dsub"></p></div>
+      <div class="dktools">
+        <button type="button" class="ghost" id="dsort"></button>
+        <button type="button" class="ghost" id="dexp"></button>
+        <button type="button" class="ghost" id="dsize"></button>
+        <button type="button" class="ghost" id="dedit"></button>
+      </div>
+      <div class="dkedit" id="dkedit" hidden>
+        <label>Nome do site<input id="elogo"></label>
+        <label>Ícone do site<input type="file" id="elogoic" accept="image/*"></label>
+        <label>Título da página<input id="etitle"></label>
+        <label>Subtítulo<input id="esub"></label>
+        <label>Imagem do centro da roda (PNG sem fundo fica melhor)<input type="file" id="ecim" accept="image/*"></label>
+        <button type="button" class="ghost" id="ecrm">Usar a imagem padrão</button>
+        <button type="button" id="dnew">+ Novo deck</button>
+        <button type="button" class="ghost" id="dexport">Exportar para visualização</button>
+        <span class="expst" id="expst"></span>
+      </div>
+      <div class="chips" id="dchips"></div>
+    </div>
+    <div id="orbit"></div>
+    <div id="dpanel"></div>
+    <div id="dlist" hidden></div>
+  </section>
+  <section id="gal" hidden>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Buscar por nome, frase ou habilidade" aria-label="Buscar cartas">
+      <select id="fr" aria-label="Filtrar por raridade"><option value="">Todas as raridades</option><option>Comum</option><option>Rara</option><option>Épica</option><option>Lendária</option><option>Mítica</option><option>Necromante</option><option>Coração Partido</option><option>Rage</option><option>Vida Boa</option><option>Forma Base</option><option>Moments</option><option>Counter</option></select>
+      <select id="so" aria-label="Ordenar"><option value="p">Maior poder</option><option value="n">Nome</option><option value="r">Mais recentes</option></select>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="none" id="none" hidden>Nenhuma carta encontrada.</p>
+  </section>
+  <section id="mk" hidden>
+    <div class="work">
+      <div id="pv" aria-live="polite"></div>
+      <form id="f" autocomplete="off">
+        <label>Nome<input id="name"></label>
+        <label>Subtítulo (frase logo abaixo do nome)<input id="sub"></label>
+        <label>Nome da habilidade<input id="ab"></label>
+        <label>O que a habilidade faz<textarea id="abd"></textarea></label>
+        <label>Descrição (frase de efeito no rodapé)<textarea id="desc"></textarea></label>
+        <div class="row">
+          <label>Tipo<input id="type"></label>
+          <label style="grid-template-columns:1fr">Raridade<select id="rar"><option>Comum</option><option>Rara</option><option>Épica</option><option>Lendária</option><option>Mítica</option><option>Necromante</option><option>Coração Partido</option><option>Rage</option><option>Vida Boa</option><option>Forma Base</option><option>Moments</option><option>Counter</option></select></label>
+        </div>
+        <label>Deck<select id="cdk"></select></label>
+        <label>Foto<input type="file" id="photo" accept="image/*"></label>
+        <fieldset id="fxp"><legend>Efeitos da foto</legend>
+          <label class="chk"><input type="checkbox" id="cut"> Remover o fundo (detecta a pessoa ou o objeto no centro)</label>
+          <label>Sensibilidade do fundo<input type="range" id="tol" min="10" max="120" value="45"></label>
+          <label>Vinheta: esmaecer as bordas e mesclar com a carta<input type="range" id="vig" min="0" max="100" value="0"></label>
+        </fieldset>
+        <label class="chk"><input type="checkbox" id="full"> Arte total (a foto ocupa a carta inteira)</label>
+        <div id="bopts" hidden style="display:grid;gap:10px">
+        <label class="chk"><input type="checkbox" id="over"> Traçado do fundo por cima da foto</label>
+        <label class="chk"><input type="checkbox" id="sil" checked> Moments: silhueta sobre a foto</label>
+        <label>Cor da carta<input type="color" id="bcolor" value="#8fd8ff"></label>
+        <button type="button" class="ghost" id="bclr">Voltar à cor padrão</button>
+        </div>
+        <div id="hopts" hidden style="display:grid;gap:10px">
+          <label class="chk"><input type="checkbox" id="hattr" checked> Mostrar os atributos (Coração Partido e Counter)</label>
+        </div>
+        <fieldset id="st"><legend>Atributos (nome e nota de 0 a 100)</legend></fieldset>
+        <button type="button" id="save">Salvar na galeria</button>
+      </form>
+    </div>
+  </section>
+</main>
+<dialog id="dlg" aria-label="Detalhe da carta">
+  <div id="big"></div>
+  <div class="acts">
+    <button type="button" class="ghost" id="ed">Editar</button>
+    <button type="button" class="ghost" id="rm">Remover</button>
+    <button type="button" id="cl">Fechar</button>
+  </div>
+</dialog>
+<dialog id="icdlg" aria-label="Mudar o ícone do deck">
+  <div class="icbox">
+    <h3>Ícone do deck</h3>
+    <label>Emoji ou símbolo<input id="icem" maxlength="4" placeholder="🎮"></label>
+    <label>Ou envie uma imagem<input type="file" id="icf" accept="image/*"></label>
+    <div class="icprev" id="icprev"></div>
+    <div class="acts"><button type="button" class="ghost" id="icno">Cancelar</button><button type="button" id="icok">Salvar</button></div>
+  </div>
+</dialog>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
